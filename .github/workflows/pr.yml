@@ -23,7 +23,7 @@ jobs:
         run: npm run typecheck --if-present
 
       - name: Lint
-        run: npm run lint --if-present
+        run: next lint
 
       - name: Unit tests (with coverage)
         run: npm test --if-present -- --coverage
