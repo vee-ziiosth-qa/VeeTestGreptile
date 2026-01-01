@@ -100,7 +100,6 @@ VeeTestGreptile/
 │   └── globals.css        # Global styles
 ├── components/            # Reusable React components
 ├── public/               # Static assets
-├── tailwind.config.js    # Tailwind CSS configuration
 ├── tsconfig.json         # TypeScript configuration
 ├── next.config.js        # Next.js configuration
 └── package.json          # Project dependencies
