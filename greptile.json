@@ -1,0 +1,33 @@
+{
+  "strictness": 2,
+  "commentTypes": ["logic", "syntax", "style", "info"],
+  "triggerOnUpdates": true,
+
+  "statusCheck": true,
+  "updateExistingSummaryComment": true,
+
+  "fileChangeLimit": 80,
+  "excludeAuthors": ["dependabot[bot]"],
+
+  "ignorePatterns": ".next/**\nnode_modules/**\ndist/**\nbuild/**\ncoverage/**\n**/*.min.*\n**/*.generated.*\n**/*.snap\n**/*.lock\n*.md",
+
+  "instructions": "You are reviewing a TypeScript/JavaScript/CSS web app. Prioritize: correctness of business logic, security, data validation, error handling, and maintainability. Require unit tests for business logic changes (coverage expectations noted below). For React/UI code: watch for memory leaks (missing cleanup in useEffect), event listener leaks, and stale closures. Avoid nitpicks unless they affect correctness or team standards.",
+
+  "customContext": {
+    "rules": [
+      { "rule": "Any change to business logic must include/modify unit tests and explain coverage impact.", "scope": ["src/**", "app/**", "pages/**"] },
+      { "rule": "Never leave event listeners/subscriptions without cleanup (removeEventListener/unsubscribe/abort) in React hooks and long-lived modules.", "scope": ["src/**", "app/**"] },
+      { "rule": "Prefer TypeScript types over 'any'. If 'any' is used, justify it in code comments.", "scope": ["**/*.ts", "**/*.tsx"] },
+      { "rule": "Async code must handle errors explicitly (try/catch or returned Result pattern).", "scope": ["**/*.ts", "**/*.tsx", "**/*.js"] }
+    ],
+    "files": [
+      { "path": "docs/requirements.md", "description": "Business requirements & acceptance criteria", "scope": ["src/**", "app/**", "pages/**"] },
+      { "path": "docs/architecture.md", "description": "Architecture and layering rules", "scope": ["src/**", "app/**"] },
+      { "path": "docs/coding-standards.md", "description": "Coding standards (TS/JS/CSS)", "scope": ["**/*"] },
+      { "path": "CONTRIBUTING.md", "description": "Contributor workflow (tests, lint, PR checklist)", "scope": ["**/*"] }
+    ],
+    "other": [
+      { "content": "Prefer small pure functions for business logic to maximize testability; UI should call business logic through a thin service layer." }
+    ]
+  }
+}
