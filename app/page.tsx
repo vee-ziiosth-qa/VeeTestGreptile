@@ -352,10 +352,10 @@ export default function Home() {
             Join thousands of restaurants already using KitchenFlow to streamline their operations.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg" aria-label="Start your 30-day free trial with no credit card required">
+            <button className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg" aria-label="Get started with 30-day free trial">
               Get Started – 30-Day Free Trial
             </button>
-            <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-100 transition" aria-label="Schedule a personalized demo with our team">
+            <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-100 transition" aria-label="Schedule a demo">
               Schedule a Demo
             </button>
           </div>
