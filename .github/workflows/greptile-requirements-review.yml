@@ -1,0 +1,58 @@
+name: Greptile Requirements Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  greptile:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Greptile query (requirements-focused)
+        env:
+          GREPTILE_API_KEY: ${{ secrets.GREPTILE_API_KEY }}
+          GREPTILE_GH_TOKEN: ${{ secrets.GREPTILE_GITHUB_TOKEN }}
+          OWNER_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        run: |
+          node -e '
+          (async () => {
+            const msg = `
+You are reviewing PR #${process.env.PR_NUMBER}.
+Use docs/requirements.md and docs/architecture.md as source of truth.
+1) Identify any requirement violations or missing acceptance criteria updates.
+2) Identify missing/insufficient unit tests for business logic and suggest exact test cases.
+3) Flag memory/event leak risks (missing cleanup, leaked listeners, stale intervals, un-aborted fetch).
+Return a concise checklist + top 5 actionable fixes.
+`;
+            const res = await fetch("https://api.greptile.com/v2/query", {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer " + process.env.GREPTILE_API_KEY,
+                "X-GitHub-Token": process.env.GREPTILE_GH_TOKEN,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                messages: [{ id: "1", role: "user", content: msg }],
+                repositories: [{ remote: "github", repository: process.env.OWNER_REPO, branch: process.env.BASE_BRANCH }],
+                genius: true
+              })
+            });
+
+            if (!res.ok) {
+              const t = await res.text();
+              console.error("Greptile error:", res.status, t);
+              process.exit(1);
+            }
+
+            const data = await res.json();
+            // Write to stdout for next step
+            console.log(JSON.stringify(data));
+          })();'
