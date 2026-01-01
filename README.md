@@ -98,7 +98,6 @@ VeeTestGreptile/
 │   ├── layout.tsx         # Root layout component
 │   ├── page.tsx           # Home page
 │   └── globals.css        # Global styles
-├── components/            # Reusable React components
 ├── public/               # Static assets
 ├── tsconfig.json         # TypeScript configuration
 ├── next.config.js        # Next.js configuration
