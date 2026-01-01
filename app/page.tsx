@@ -286,7 +286,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <button className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg">
-              Start 30-Day Free Trial
+              Get Started – 30-Day Free Trial
             </button>
             <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">
               Schedule a Demo
