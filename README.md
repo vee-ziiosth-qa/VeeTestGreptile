@@ -60,7 +60,7 @@ This SaaS platform includes the following key features for restaurant management
 
 ### Prerequisites
 
-- Node.js 18.x or higher
+- Node.js 20.9.0 or higher
 - npm or yarn
 
 ### Installation
