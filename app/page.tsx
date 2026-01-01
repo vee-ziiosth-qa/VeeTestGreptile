@@ -1,29 +1,96 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <nav className="bg-white shadow-sm sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-blue-600">🍳 KitchenFlow</h1>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               <Link href="#features" className="text-gray-700 hover:text-primary-600 transition">Features</Link>
               <Link href="#solutions" className="text-gray-700 hover:text-primary-600 transition">Solutions</Link>
               <Link href="#pricing" className="text-gray-700 hover:text-primary-600 transition">Pricing</Link>
               <Link href="#contact" className="text-gray-700 hover:text-primary-600 transition">Contact</Link>
             </div>
-            <div className="flex space-x-4">
-              <button className="px-4 py-2 text-primary-600 hover:text-primary-700 transition">Sign In</button>
-              <button className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition">Get Started</button>
+            
+            {/* Desktop Action Buttons */}
+            <div className="hidden md:flex space-x-4">
+              <button className="px-4 py-2 text-primary-600 hover:text-primary-700 transition" aria-label="Sign in to your account">Sign In</button>
+              <button className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition" aria-label="Get started with KitchenFlow">Get Started</button>
             </div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 transition"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-label="Toggle mobile menu"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+          
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link 
+                  href="#features" 
+                  className="block px-3 py-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Features
+                </Link>
+                <Link 
+                  href="#solutions" 
+                  className="block px-3 py-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Solutions
+                </Link>
+                <Link 
+                  href="#pricing" 
+                  className="block px-3 py-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <Link 
+                  href="#contact" 
+                  className="block px-3 py-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+                <div className="pt-4 flex flex-col space-y-2">
+                  <button className="px-4 py-2 text-primary-600 hover:text-primary-700 transition text-left" aria-label="Sign in to your account">Sign In</button>
+                  <button className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition" aria-label="Get started with KitchenFlow">Get Started</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
+      {/* Main Content */}
+      <main>
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -35,10 +102,10 @@ export default function Home() {
             Manage orders, inventory, staff, and analytics all in one place.
           </p>
           <div className="flex justify-center space-x-4">
-            <button className="px-8 py-3 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg">
+            <button className="px-8 py-3 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg" aria-label="Start your 30-day free trial">
               Start Free Trial
             </button>
-            <button className="px-8 py-3 border-2 border-primary-600 text-primary-600 rounded-lg text-lg font-semibold hover:bg-primary-50 transition">
+            <button className="px-8 py-3 border-2 border-primary-600 text-primary-600 rounded-lg text-lg font-semibold hover:bg-primary-50 transition" aria-label="Watch a demo video">
               Watch Demo
             </button>
           </div>
@@ -231,7 +298,7 @@ export default function Home() {
                 <li>✓ Staff scheduling</li>
                 <li>✓ Email support</li>
               </ul>
-              <button className="w-full py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+              <button className="w-full py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition" aria-label="Start free trial of Starter plan">
                 Start Free Trial
               </button>
             </div>
@@ -252,7 +319,7 @@ export default function Home() {
                 <li>✓ Analytics & reporting</li>
                 <li>✓ Priority support</li>
               </ul>
-              <button className="w-full py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition">
+              <button className="w-full py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition" aria-label="Start free trial of Professional plan">
                 Start Free Trial
               </button>
             </div>
@@ -269,7 +336,7 @@ export default function Home() {
                 <li>✓ Dedicated support</li>
                 <li>✓ Custom training</li>
               </ul>
-              <button className="w-full py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+              <button className="w-full py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition" aria-label="Contact sales team for Enterprise pricing">
                 Contact Sales
               </button>
             </div>
@@ -285,10 +352,10 @@ export default function Home() {
             Join thousands of restaurants already using KitchenFlow to streamline their operations.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg">
+            <button className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg" aria-label="Start your 30-day free trial with no credit card required">
               Get Started – 30-Day Free Trial
             </button>
-            <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">
+            <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-100 transition" aria-label="Schedule a personalized demo with our team">
               Schedule a Demo
             </button>
           </div>
@@ -341,6 +408,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }
